@@ -3,6 +3,8 @@ const AssistantV1 = require('watson-developer-cloud/assistant/v1');
 const express = require('express');
 
 const app = express();
+app.use(express.static('./public'));
+
 const port = 3000;
 
 const assistant = new AssistantV1({
@@ -26,4 +28,4 @@ app.get('/conversation/:text*?', (req, res) => {
   });
 });
 
-app.listen(port, () => console.log(`Nosso API está rodando na porta ${port}`));
+app.listen(port, () => console.log(`Running on port ${port}`));
