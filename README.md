@@ -1,3 +1,3 @@
-# watson-assistant-node-api
+# Watson sample chatbot
 
-A simple API in Node.js to use the Watson Assistant API
+A simple chatbot using IBM Watson and Node.js
