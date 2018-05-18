@@ -1,6 +1,8 @@
 const textInput = document.getElementById('textInput');
 const chat = document.getElementById('chat');
 
+const context = {};
+
 const templateChatMessage = (message, from) => `
   <div class="from-${from}">
     <div class="message-inner">
@@ -18,9 +20,19 @@ const InsertTemplateInTheChat = (template) => {
 };
 
 // Calling server and get the watson output
-const getWatsonMessageAndInsertTemplate = async (message = '') => {
-  const uri = `http://localhost:3000/conversation/${message}`;
-  const response = await (await fetch(uri)).json();
+const getWatsonMessageAndInsertTemplate = async (text = '') => {
+  const uri = 'http://localhost:3000/conversation/';
+
+  const response = await (await fetch(uri, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      text,
+      context,
+    }),
+  })).json();
+
+  Object.assign(context, response.context);
 
   const template = templateChatMessage(response.output.text, 'watson');
 
