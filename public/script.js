@@ -1,7 +1,7 @@
 const textInput = document.getElementById('textInput');
 const chat = document.getElementById('chat');
 
-const context = {};
+let context = {};
 
 const templateChatMessage = (message, from) => `
   <div class="from-${from}">
@@ -32,7 +32,7 @@ const getWatsonMessageAndInsertTemplate = async (text = '') => {
     }),
   })).json();
 
-  Object.assign(context, response.context);
+  context = response.context;
 
   const template = templateChatMessage(response.output.text, 'watson');
 
