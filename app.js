@@ -27,9 +27,12 @@ app.post('/conversation/', (req, res) => {
   };
 
   assistant.message(params, (err, response) => {
-    if (err) res.status(500).json(err);
-
-    res.json(response);
+    if (err) {
+      console.error(err);
+      res.status(500).json(err);
+    } else {
+      res.json(response);
+    }
   });
 });
 
